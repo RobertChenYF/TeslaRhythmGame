@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 889eab4142ff14802b273b44a9ec6a57
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - HitBlock: {fileID: 6337813881909200254, guid: 71b69a0e8b6d84e82abb89172cb4177f, type: 3}
+  - DodgeBlock: {fileID: 3792263559898515565, guid: a4a85e0cee396424b9e3cd50c33518a4, type: 3}
+  - LongHitBlock: {fileID: 8401452342417455197, guid: 151a12ff91ab043d195289d66ac9eda3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
