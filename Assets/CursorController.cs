@@ -8,11 +8,12 @@ public class CursorController : MonoBehaviour
     [SerializeField]private AnimationCurve curve;
     [SerializeField]private float moveSpeed;
     [SerializeField]private float HorizontalScale;
-    [SerializeField] private float VerticalScale;
+    [SerializeField]private float VerticalScale;
+    private Quaternion currentRotation;
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -23,6 +24,8 @@ public class CursorController : MonoBehaviour
         PosValue = Mathf.Clamp(PosValue, 0, 1);
         
         transform.localPosition = new Vector3((PosValue-0.5f)*2*HorizontalScale,curve.Evaluate(PosValue)*VerticalScale,transform.localPosition.z);
+        currentRotation.eulerAngles = new Vector3(currentRotation.eulerAngles.x,currentRotation.eulerAngles.y, curve.Evaluate(PosValue)*60*Mathf.Sign(PosValue-0.5f));
+        transform.rotation = currentRotation;
     }
 
     private void OnCollisionEnter(Collision collision)
