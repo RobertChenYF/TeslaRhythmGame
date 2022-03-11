@@ -37,7 +37,7 @@ public class CursorController : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Cursor"))
                 {
                     hitObj = true;
-                    GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                    GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0,0,1,0.7f));
                     Debug.Log(hit.point);
                     //Debug.Log();
                     
@@ -48,7 +48,7 @@ public class CursorController : MonoBehaviour
         else
         {
             hitObj = false;
-            GetComponent<MeshRenderer>().material.SetColor("_Color", Color.blue);
+            GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(0, 0, 1, 0.3f));
         }
 
         if (hitObj)
@@ -82,38 +82,54 @@ public class CursorController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
-
+            collision.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",
+                collision.gameObject.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor")*30.0f);
             particle.Emit(20);
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
         }
         if (collision.gameObject.CompareTag("Dodge"))
         {
             particleRed.Emit(20);
-            Debug.Log("Dodge");
+            collision.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",
+    collision.gameObject.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor") * 30.0f);
+            //Debug.Log("Dodge");
         }
         if (collision.gameObject.CompareTag("LongHit"))
         {
             particleGreen.Emit(20);
-            Debug.Log("LongHit");
+
+            collision.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",
+collision.gameObject.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor") * 30.0f);
+            //Debug.Log("LongHit");
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("LongHit"))
+        {
+
+            collision.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",
+collision.gameObject.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor") / 30.0f);
+            //Debug.Log("LongHit");
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
             particle.Emit(Mathf.CeilToInt(60 * Time.deltaTime));
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
         }
         if (collision.gameObject.CompareTag("Dodge"))
         {
             particleRed.Emit(Mathf.CeilToInt(60 * Time.deltaTime));
-            Debug.Log("Dodge");
+            //Debug.Log("Dodge");
         }
         if (collision.gameObject.CompareTag("LongHit"))
         {
             particleGreen.Emit(Mathf.CeilToInt(60 * Time.deltaTime));
-            Debug.Log("LongHit");
+            //Debug.Log("LongHit");
         }
     }
 }
