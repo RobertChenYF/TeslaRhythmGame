@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        
+        AudioSource.PlayClipAtPoint(song, transform.position, 1);
     }
 
     private void Update()
